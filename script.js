@@ -65,8 +65,21 @@ function renderNotes() {
         var editBtn = document.createElement("button");
         editBtn.innerHTML = "Edit";
         editBtn.className = "editBtn";
-        editBtn.addEventListener("click", function() {
-            // code to display the note in an input field and allow editing
+       editBtn.addEventListener("click", function() {
+            var input = document.createElement("input");
+            input.value = note;
+            input.className = "edit-input";
+            newNote.innerHTML = "";
+            newNote.appendChild(input);
+            var saveBtn = document.createElement("button");
+            saveBtn.innerHTML = "Save";
+            saveBtn.className = "saveBtn";
+            saveBtn.addEventListener("click", function() {
+                weeklyNotes[currentWeek][index] = input.value;
+                localStorage.setItem("weeklyNotes", JSON.stringify(weeklyNotes));
+                renderNotes();
+            });
+            newNote.appendChild(saveBtn);
         });
         var deleteBtn = document.createElement("button");
         deleteBtn.innerHTML = "Delete";
